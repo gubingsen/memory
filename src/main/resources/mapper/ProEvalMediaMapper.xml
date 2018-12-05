@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.three.memory.mapper.ProEvalMediaMapper" >
+  <resultMap id="BaseResultMap" type="com.three.memory.domain.ProEvalMedia" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="proevalid" property="proevalid" jdbcType="INTEGER" />
+    <result column="media" property="media" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, proevalid, media
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_proevalmedia
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_proevalmedia
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.three.memory.domain.ProEvalMedia" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_proevalmedia (proevalid, media)
+    values (#{proevalid,jdbcType=INTEGER}, #{media,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.three.memory.domain.ProEvalMedia" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_proevalmedia
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="proevalid != null" >
+        proevalid,
+      </if>
+      <if test="media != null" >
+        media,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="proevalid != null" >
+        #{proevalid,jdbcType=INTEGER},
+      </if>
+      <if test="media != null" >
+        #{media,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.three.memory.domain.ProEvalMedia" >
+    update t_proevalmedia
+    <set >
+      <if test="proevalid != null" >
+        proevalid = #{proevalid,jdbcType=INTEGER},
+      </if>
+      <if test="media != null" >
+        media = #{media,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.three.memory.domain.ProEvalMedia" >
+    update t_proevalmedia
+    set proevalid = #{proevalid,jdbcType=INTEGER},
+      media = #{media,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

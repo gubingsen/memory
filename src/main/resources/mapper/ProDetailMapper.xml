@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.three.memory.mapper.ProDetailMapper" >
+  <resultMap id="BaseResultMap" type="com.three.memory.domain.ProDetail" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="proid" property="proid" jdbcType="INTEGER" />
+    <result column="vprice" property="vprice" jdbcType="INTEGER" />
+    <result column="carriage" property="carriage" jdbcType="INTEGER" />
+    <result column="designer" property="designer" jdbcType="VARCHAR" />
+    <result column="type1" property="type1" jdbcType="VARCHAR" />
+    <result column="type2" property="type2" jdbcType="VARCHAR" />
+    <result column="type3" property="type3" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, proid, vprice, carriage, designer, type1, type2, type3
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_prodetail
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_prodetail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.three.memory.domain.ProDetail" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_prodetail (proid, vprice, carriage, 
+      designer, type1, type2, 
+      type3)
+    values (#{proid,jdbcType=INTEGER}, #{vprice,jdbcType=INTEGER}, #{carriage,jdbcType=INTEGER}, 
+      #{designer,jdbcType=VARCHAR}, #{type1,jdbcType=VARCHAR}, #{type2,jdbcType=VARCHAR}, 
+      #{type3,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.three.memory.domain.ProDetail" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_prodetail
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="proid != null" >
+        proid,
+      </if>
+      <if test="vprice != null" >
+        vprice,
+      </if>
+      <if test="carriage != null" >
+        carriage,
+      </if>
+      <if test="designer != null" >
+        designer,
+      </if>
+      <if test="type1 != null" >
+        type1,
+      </if>
+      <if test="type2 != null" >
+        type2,
+      </if>
+      <if test="type3 != null" >
+        type3,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="proid != null" >
+        #{proid,jdbcType=INTEGER},
+      </if>
+      <if test="vprice != null" >
+        #{vprice,jdbcType=INTEGER},
+      </if>
+      <if test="carriage != null" >
+        #{carriage,jdbcType=INTEGER},
+      </if>
+      <if test="designer != null" >
+        #{designer,jdbcType=VARCHAR},
+      </if>
+      <if test="type1 != null" >
+        #{type1,jdbcType=VARCHAR},
+      </if>
+      <if test="type2 != null" >
+        #{type2,jdbcType=VARCHAR},
+      </if>
+      <if test="type3 != null" >
+        #{type3,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.three.memory.domain.ProDetail" >
+    update t_prodetail
+    <set >
+      <if test="proid != null" >
+        proid = #{proid,jdbcType=INTEGER},
+      </if>
+      <if test="vprice != null" >
+        vprice = #{vprice,jdbcType=INTEGER},
+      </if>
+      <if test="carriage != null" >
+        carriage = #{carriage,jdbcType=INTEGER},
+      </if>
+      <if test="designer != null" >
+        designer = #{designer,jdbcType=VARCHAR},
+      </if>
+      <if test="type1 != null" >
+        type1 = #{type1,jdbcType=VARCHAR},
+      </if>
+      <if test="type2 != null" >
+        type2 = #{type2,jdbcType=VARCHAR},
+      </if>
+      <if test="type3 != null" >
+        type3 = #{type3,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.three.memory.domain.ProDetail" >
+    update t_prodetail
+    set proid = #{proid,jdbcType=INTEGER},
+      vprice = #{vprice,jdbcType=INTEGER},
+      carriage = #{carriage,jdbcType=INTEGER},
+      designer = #{designer,jdbcType=VARCHAR},
+      type1 = #{type1,jdbcType=VARCHAR},
+      type2 = #{type2,jdbcType=VARCHAR},
+      type3 = #{type3,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

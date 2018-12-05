@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.three.memory.mapper.CartProMapper" >
+  <resultMap id="BaseResultMap" type="com.three.memory.domain.CartPro" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="cartid" property="cartid" jdbcType="INTEGER" />
+    <result column="prodetid" property="prodetid" jdbcType="INTEGER" />
+    <result column="num" property="num" jdbcType="INTEGER" />
+    <result column="type1" property="type1" jdbcType="VARCHAR" />
+    <result column="type2" property="type2" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, cartid, prodetid, num, type1, type2
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_cartpro
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_cartpro
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.three.memory.domain.CartPro" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_cartpro (cartid, prodetid, num, 
+      type1, type2)
+    values (#{cartid,jdbcType=INTEGER}, #{prodetid,jdbcType=INTEGER}, #{num,jdbcType=INTEGER}, 
+      #{type1,jdbcType=VARCHAR}, #{type2,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.three.memory.domain.CartPro" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_cartpro
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cartid != null" >
+        cartid,
+      </if>
+      <if test="prodetid != null" >
+        prodetid,
+      </if>
+      <if test="num != null" >
+        num,
+      </if>
+      <if test="type1 != null" >
+        type1,
+      </if>
+      <if test="type2 != null" >
+        type2,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cartid != null" >
+        #{cartid,jdbcType=INTEGER},
+      </if>
+      <if test="prodetid != null" >
+        #{prodetid,jdbcType=INTEGER},
+      </if>
+      <if test="num != null" >
+        #{num,jdbcType=INTEGER},
+      </if>
+      <if test="type1 != null" >
+        #{type1,jdbcType=VARCHAR},
+      </if>
+      <if test="type2 != null" >
+        #{type2,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.three.memory.domain.CartPro" >
+    update t_cartpro
+    <set >
+      <if test="cartid != null" >
+        cartid = #{cartid,jdbcType=INTEGER},
+      </if>
+      <if test="prodetid != null" >
+        prodetid = #{prodetid,jdbcType=INTEGER},
+      </if>
+      <if test="num != null" >
+        num = #{num,jdbcType=INTEGER},
+      </if>
+      <if test="type1 != null" >
+        type1 = #{type1,jdbcType=VARCHAR},
+      </if>
+      <if test="type2 != null" >
+        type2 = #{type2,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.three.memory.domain.CartPro" >
+    update t_cartpro
+    set cartid = #{cartid,jdbcType=INTEGER},
+      prodetid = #{prodetid,jdbcType=INTEGER},
+      num = #{num,jdbcType=INTEGER},
+      type1 = #{type1,jdbcType=VARCHAR},
+      type2 = #{type2,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
