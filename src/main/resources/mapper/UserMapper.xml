@@ -125,4 +125,11 @@
       flag = #{flag,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectByUsername" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from t_user
+    where username = #{username}
+  </select>
 </mapper>
