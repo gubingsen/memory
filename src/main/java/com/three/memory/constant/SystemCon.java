@@ -17,6 +17,9 @@ public class SystemCon {
     public static final String TOKENKEY="Hek0nG7FXhO2pzxelPFoog==";
     public static final String PASSKEY="L+GRoop7TLMIHm9lBGfWoA==";
 
+    //redis中token的键
+    public static final String REDISTOKEN="token";
+
 
 
 

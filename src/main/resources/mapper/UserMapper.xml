@@ -132,4 +132,11 @@
     from t_user
     where username = #{username}
   </select>
+
+  <select id="selectByUser" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from t_user
+    where username = #{username} and password = #{password}
+  </select>
 </mapper>
