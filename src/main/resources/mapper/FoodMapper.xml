@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.three.memory.mapper.FoodMapper">
+  <resultMap id="BaseResultMap" type="com.three.memory.domain.Food">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="ftyid" jdbcType="INTEGER" property="ftyid" />
+    <result column="foodname" jdbcType="VARCHAR" property="foodname" />
+    <result column="img" jdbcType="VARCHAR" property="img" />
+    <result column="gestation" jdbcType="INTEGER" property="gestation" />
+    <result column="lyingin" jdbcType="INTEGER" property="lyingin" />
+    <result column="lactation" jdbcType="INTEGER" property="lactation" />
+    <result column="bybytime" jdbcType="VARCHAR" property="bybytime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, ftyid, foodname, img, suitable, effect, gestation, lyingin, lactation, bybytime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_food
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_food
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.three.memory.domain.Food">
+    insert into t_food (id, ftyid, foodname, 
+      img, gestation, lyingin, 
+      lactation, bybytime)
+    values (#{id,jdbcType=INTEGER}, #{ftyid,jdbcType=INTEGER}, #{foodname,jdbcType=VARCHAR}, 
+      #{img,jdbcType=VARCHAR}, #{gestation,jdbcType=INTEGER}, #{lyingin,jdbcType=INTEGER}, 
+      #{lactation,jdbcType=INTEGER}, #{bybytime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.three.memory.domain.Food">
+    insert into t_food
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="ftyid != null">
+        ftyid,
+      </if>
+      <if test="foodname != null">
+        foodname,
+      </if>
+      <if test="img != null">
+        img,
+      </if>
+      <if test="gestation != null">
+        gestation,
+      </if>
+      <if test="lyingin != null">
+        lyingin,
+      </if>
+      <if test="lactation != null">
+        lactation,
+      </if>
+      <if test="bybytime != null">
+        bybytime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="ftyid != null">
+        #{ftyid,jdbcType=INTEGER},
+      </if>
+      <if test="foodname != null">
+        #{foodname,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null">
+        #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="gestation != null">
+        #{gestation,jdbcType=INTEGER},
+      </if>
+      <if test="lyingin != null">
+        #{lyingin,jdbcType=INTEGER},
+      </if>
+      <if test="lactation != null">
+        #{lactation,jdbcType=INTEGER},
+      </if>
+      <if test="bybytime != null">
+        #{bybytime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.three.memory.domain.Food">
+    update t_food
+    <set>
+      <if test="ftyid != null">
+        ftyid = #{ftyid,jdbcType=INTEGER},
+      </if>
+      <if test="foodname != null">
+        foodname = #{foodname,jdbcType=VARCHAR},
+      </if>
+      <if test="img != null">
+        img = #{img,jdbcType=VARCHAR},
+      </if>
+      <if test="gestation != null">
+        gestation = #{gestation,jdbcType=INTEGER},
+      </if>
+      <if test="lyingin != null">
+        lyingin = #{lyingin,jdbcType=INTEGER},
+      </if>
+      <if test="lactation != null">
+        lactation = #{lactation,jdbcType=INTEGER},
+      </if>
+      <if test="bybytime != null">
+        bybytime = #{bybytime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.three.memory.domain.Food">
+    update t_food
+    set ftyid = #{ftyid,jdbcType=INTEGER},
+      foodname = #{foodname,jdbcType=VARCHAR},
+      img = #{img,jdbcType=VARCHAR},
+      gestation = #{gestation,jdbcType=INTEGER},
+      lyingin = #{lyingin,jdbcType=INTEGER},
+      lactation = #{lactation,jdbcType=INTEGER},
+      bybytime = #{bybytime,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectFoodAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_food
+  </select>
+  <select id="selectByFtyId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_food
+    where ftyid = #{ftyid}
+  </select>
+  <select id="selectByUsrId" resultMap="BaseResultMap">
+    select
+    tf.id as id, ftyid, foodname, img, suitable, effect, gestation, lyingin, lactation, bybytime
+    from t_food tf,t_foodcollect tc
+    where tc.fodid=tf.id and tc.usrid=#{usrid}
+  </select>
+</mapper>
