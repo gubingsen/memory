@@ -42,34 +42,6 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ResultBean checkLogin(String token) {
-        if (StringUtil.checkEmpty(token)) {
-            return ResultUtil.setError(SystemCon.RERROR1, "请重新登录", null);
-        }
-        String value = (String) service.hmGet(SystemCon.REDISTOKEN, token);
-
-        if (StringUtil.checkNoEmpty(value)) {
-            User user = JSON.parseObject(value, User.class);
-            User u = mapper.selectByUser(user);
-            if (u != null) {
-                //更新token
-                String tk = TokenUtil.updateToken(TokenUtil.parseToken(token));
-                //删除Redis中的存储的token
-                service.delHash(SystemCon.REDISTOKEN, token);
-                //重新添加token到Redis中
-                service.hmSet(SystemCon.REDISTOKEN, tk, JSON.toJSONString(u));
-
-                return ResultUtil.setOKToken(tk, u, "登录信息有效");
-            } else {
-                return ResultUtil.setError(SystemCon.RERROR1, "请重新登录", null);
-            }
-
-        } else {
-            return ResultUtil.setError(SystemCon.RERROR1, "请重新登录", null);
-        }
-    }
-
-    @Override
     public ResultBean loginout(String token) {
         service.delHash("token", token);
         return ResultUtil.setOK("退出成功", null);
@@ -78,5 +50,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public ResultBean regist(User user) {
         return ResultUtil.execOp(mapper.insertSelective(user), "注册");
+    }
+
+    @Override
+    public ResultBean checkUsername(String username) {
+        User user = mapper.selectByUsername(username);
+        if (user == null) {
+            return ResultUtil.setOK("用户名可用", null);
+        } else {
+            return ResultUtil.setError(SystemCon.RERROR2, "用户名不可用", null);
+        }
     }
 }

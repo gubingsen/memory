@@ -14,13 +14,6 @@ public interface UserService {
     ResultBean login(String username, String password);
 
     /**
-     * 校验是否登录
-     * @param token
-     * @return
-     */
-    ResultBean checkLogin(String token);
-
-    /**
      * 注销登录
      * @param token
      * @return
@@ -33,4 +26,11 @@ public interface UserService {
      * @return
      */
     ResultBean regist(User user);
+
+    /**
+     * 判断用户名是否存在
+     * @param username
+     * @return
+     */
+    ResultBean checkUsername(String username);
 }

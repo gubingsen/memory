@@ -16,23 +16,44 @@ public class UserController {
     @Autowired
     private RedisService redisService;
 
+    /**
+     * 实现用户登录
+     * @param username
+     * @param password
+     * @return
+     */
     @RequestMapping("login.do")
     public ResultBean login(String username, String password) {
         return service.login(username, password);
     }
 
-    @RequestMapping("checklogin.do")
-    public ResultBean checkLogin(String token) {
-        return service.checkLogin(token);
-    }
-
+    /**
+     * 实现退出登录
+     * @param token
+     * @return
+     */
     @RequestMapping("logout.do")
     public ResultBean logout(String token) {
         return service.loginout(token);
     }
 
+    /**
+     * 用户注册
+     * @param user
+     * @return
+     */
     @RequestMapping("regist.do")
     public ResultBean regist(User user) {
         return service.regist(user);
+    }
+
+    /**
+     * 判断用户名是否可用
+     * @param username
+     * @return
+     */
+    @RequestMapping("checkUsername.do")
+    public ResultBean checkName(String username) {
+        return service.checkUsername(username);
     }
 }
