@@ -28,4 +28,6 @@ public class SystemCon {
     public static final String bucketName="mymemory";
     public static final String filehost="media";
 
+    public static final Integer PAGENUM = 1;
+    public static final Integer PAGESIZE = 5;
 }
