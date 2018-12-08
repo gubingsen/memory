@@ -1,7 +1,12 @@
 package com.three.memory.domain;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
+/**
+ * 宝宝相册
+ */
 public class BabyMedia {
     private Integer id;
 
@@ -11,7 +16,19 @@ public class BabyMedia {
 
     private String content;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createtime;
+
+
+    private String username;
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
     public Integer getId() {
         return id;

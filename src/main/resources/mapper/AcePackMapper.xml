@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.three.memory.mapper.AcePackMapper">
+  <resultMap id="BaseResultMap" type="com.three.memory.domain.AcePack">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="imgurl" jdbcType="VARCHAR" property="imgurl" />
+    <result column="info" jdbcType="VARCHAR" property="info" />
+    <result column="number" jdbcType="INTEGER" property="number" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.three.memory.domain.AcePack">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id,imgurl,info,number,content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    from t_acepack
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_acepack
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.three.memory.domain.AcePack">
+    insert into t_acepack (id, imgurl, info, 
+      number, content)
+    values (#{id,jdbcType=INTEGER}, #{imgurl,jdbcType=VARCHAR}, #{info,jdbcType=VARCHAR}, 
+      #{number,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.three.memory.domain.AcePack">
+    insert into t_acepack
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="imgurl != null">
+        imgurl,
+      </if>
+      <if test="info != null">
+        info,
+      </if>
+      <if test="number != null">
+        number,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="imgurl != null">
+        #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="info != null">
+        #{info,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null">
+        #{number,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.three.memory.domain.AcePack">
+    update t_acepack
+    <set>
+      <if test="imgurl != null">
+        imgurl = #{imgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="info != null">
+        info = #{info,jdbcType=VARCHAR},
+      </if>
+      <if test="number != null">
+        number = #{number,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.three.memory.domain.AcePack">
+    update t_acepack
+    set imgurl = #{imgurl,jdbcType=VARCHAR},
+      info = #{info,jdbcType=VARCHAR},
+      number = #{number,jdbcType=INTEGER},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.three.memory.domain.AcePack">
+    update t_acepack
+    set imgurl = #{imgurl,jdbcType=VARCHAR},
+      info = #{info,jdbcType=VARCHAR},
+      number = #{number,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectAll" resultMap="ResultMapWithBLOBs">
+    select id,imgurl,info,number
+    from t_acepack
+  </select>
+</mapper>

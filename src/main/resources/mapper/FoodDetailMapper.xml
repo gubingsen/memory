@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.three.memory.mapper.FoodDetailMapper">
+  <resultMap id="BaseResultMap" type="com.three.memory.domain.FoodDetail">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="fodid" jdbcType="INTEGER" property="fodid" />
+    <result column="fodinfo" jdbcType="VARCHAR" property="fodinfo" />
+    <result column="gesinfo" jdbcType="VARCHAR" property="gesinfo" />
+    <result column="lyiinfo" jdbcType="VARCHAR" property="lyiinfo" />
+    <result column="lacinfo" jdbcType="VARCHAR" property="lacinfo" />
+    <result column="bybyinfo" jdbcType="VARCHAR" property="bybyinfo" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, fodid, fodinfo, gesinfo, lyiinfo, lacinfo, bybyinfo
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_fooddetail
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_fooddetail
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.three.memory.domain.FoodDetail">
+    insert into t_fooddetail (id, fodid, fodinfo, 
+      gesinfo, lyiinfo, lacinfo, 
+      bybyinfo)
+    values (#{id,jdbcType=INTEGER}, #{fodid,jdbcType=INTEGER}, #{fodinfo,jdbcType=VARCHAR}, 
+      #{gesinfo,jdbcType=VARCHAR}, #{lyiinfo,jdbcType=VARCHAR}, #{lacinfo,jdbcType=VARCHAR}, 
+      #{bybyinfo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.three.memory.domain.FoodDetail">
+    insert into t_fooddetail
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="fodid != null">
+        fodid,
+      </if>
+      <if test="fodinfo != null">
+        fodinfo,
+      </if>
+      <if test="gesinfo != null">
+        gesinfo,
+      </if>
+      <if test="lyiinfo != null">
+        lyiinfo,
+      </if>
+      <if test="lacinfo != null">
+        lacinfo,
+      </if>
+      <if test="bybyinfo != null">
+        bybyinfo,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="fodid != null">
+        #{fodid,jdbcType=INTEGER},
+      </if>
+      <if test="fodinfo != null">
+        #{fodinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="gesinfo != null">
+        #{gesinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="lyiinfo != null">
+        #{lyiinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="lacinfo != null">
+        #{lacinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="bybyinfo != null">
+        #{bybyinfo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.three.memory.domain.FoodDetail">
+    update t_fooddetail
+    <set>
+      <if test="fodid != null">
+        fodid = #{fodid,jdbcType=INTEGER},
+      </if>
+      <if test="fodinfo != null">
+        fodinfo = #{fodinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="gesinfo != null">
+        gesinfo = #{gesinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="lyiinfo != null">
+        lyiinfo = #{lyiinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="lacinfo != null">
+        lacinfo = #{lacinfo,jdbcType=VARCHAR},
+      </if>
+      <if test="bybyinfo != null">
+        bybyinfo = #{bybyinfo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.three.memory.domain.FoodDetail">
+    update t_fooddetail
+    set fodid = #{fodid,jdbcType=INTEGER},
+      fodinfo = #{fodinfo,jdbcType=VARCHAR},
+      gesinfo = #{gesinfo,jdbcType=VARCHAR},
+      lyiinfo = #{lyiinfo,jdbcType=VARCHAR},
+      lacinfo = #{lacinfo,jdbcType=VARCHAR},
+      bybyinfo = #{bybyinfo,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByFodId" resultMap="BaseResultMap">
+    select fd.id as id, fodid, fodinfo, gesinfo, lyiinfo, lacinfo, bybyinfo,img,gestation,lyingin,lactation,bybytime
+    from t_fooddetail ft,t_food fd
+    where ft.fodid=fd.id=#{fodid}
+  </select>
+</mapper>
