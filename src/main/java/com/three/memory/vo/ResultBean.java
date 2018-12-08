@@ -3,7 +3,7 @@ package com.three.memory.vo;
 import java.io.Serializable;
 import java.util.List;
 
-public class ResultBean implements Serializable {
+public class ResultBean<T> implements Serializable {
     //响应码
     private int code;
     //响应信息
@@ -21,7 +21,7 @@ public class ResultBean implements Serializable {
     //每页显示的数量
     private int pageSize;
     //数据源
-    private List<Object> list;
+    private List<T> list;
 
     public int getPages() {
         return pages;
@@ -55,11 +55,11 @@ public class ResultBean implements Serializable {
         this.pageSize = pageSize;
     }
 
-    public List<Object> getList() {
+    public List<T> getList() {
         return list;
     }
 
-    public void setList(List<Object> list) {
+    public void setList(List<T> list) {
         this.list = list;
     }
 
