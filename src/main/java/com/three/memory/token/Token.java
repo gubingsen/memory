@@ -1,9 +1,5 @@
 package com.three.memory.token;
 
-/**
- *@Author feri
- *@Date Created in 2018/11/29 14:05
- */
 public class Token {
     //信息--json
     private String content;

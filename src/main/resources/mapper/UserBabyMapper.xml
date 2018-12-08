@@ -11,26 +11,24 @@
   <sql id="Base_Column_List" >
     id, uid, babymedia, name, time
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+
+  <!--获取用户对应的宝宝的基本信息-->
+  <select id="select" resultType="com.three.memory.domain.UserBaby" parameterType="java.lang.Integer">
+    select
     <include refid="Base_Column_List" />
     from t_userbaby
-    where id = #{id,jdbcType=INTEGER}
+    where uid = #{uid,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+
+
+  <!--删除宝宝-->
+  <delete id="delete" parameterType="java.lang.Integer" >
     delete from t_userbaby
     where id = #{id,jdbcType=INTEGER}
   </delete>
+
+  <!--新增宝宝-->
   <insert id="insert" parameterType="com.three.memory.domain.UserBaby" >
-    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into t_userbaby (uid, babymedia, name, 
-      time)
-    values (#{uid,jdbcType=INTEGER}, #{babymedia,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
-      #{time,jdbcType=TIMESTAMP})
-  </insert>
-  <insert id="insertSelective" parameterType="com.three.memory.domain.UserBaby" >
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
     </selectKey>
@@ -60,11 +58,13 @@
         #{name,jdbcType=VARCHAR},
       </if>
       <if test="time != null" >
-        #{time,jdbcType=TIMESTAMP},
+        #{time,jdbcType=VARCHAR},
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.three.memory.domain.UserBaby" >
+
+  <!--修改宝宝-->
+  <update id="update" parameterType="com.three.memory.domain.UserBaby" >
     update t_userbaby
     <set >
       <if test="uid != null" >
@@ -82,12 +82,5 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.three.memory.domain.UserBaby" >
-    update t_userbaby
-    set uid = #{uid,jdbcType=INTEGER},
-      babymedia = #{babymedia,jdbcType=VARCHAR},
-      name = #{name,jdbcType=VARCHAR},
-      time = #{time,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+
 </mapper>

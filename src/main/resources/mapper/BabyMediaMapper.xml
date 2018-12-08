@@ -7,20 +7,27 @@
     <result column="media" property="media" jdbcType="VARCHAR" />
     <result column="content" property="content" jdbcType="VARCHAR" />
     <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="username" property="username" jdbcType="VARCHAR"/>
   </resultMap>
   <sql id="Base_Column_List" >
     id, babyid, media, content, createtime
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from t_babymedia
-    where id = #{id,jdbcType=INTEGER}
+
+  <!--一次固定返回十条数据-->
+  <select id="select" resultType="com.three.memory.domain.BabyMedia">
+    SELECT u.username, bm.id, bm.content, bm.createtime, bm.media
+    FROM t_user u JOIN t_userbaby ub
+    ON u.id = ub.uid
+    LEFT JOIN t_babymedia bm
+    ON ub.id = #{babyid,jdbcType=INTEGER} LIMIT #{page,jdbcType=INTEGER},10
   </select>
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_babymedia
     where id = #{id,jdbcType=INTEGER}
   </delete>
+
   <insert id="insert" parameterType="com.three.memory.domain.BabyMedia" >
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
