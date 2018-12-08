@@ -1,6 +1,5 @@
-
 server:
-  port: 8080
+  port: 8081
 
 spring:
   datasource:
@@ -9,15 +8,29 @@ spring:
     username: root
     password: 123456
     type: com.alibaba.druid.pool.DruidDataSource
+
   servlet:
     multipart:
       max-file-size: 10MB
       max-request-size: 10MB
 
+  redis:
+    host: 47.99.223.44
+    password: 854123888
+    port: 6379
+    pool:
+    jedis:
+      pool:
+        max-idle: 8
+        min-idle: 1
+        max-active: 8
+        max-wait: -1
+
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.three.memory.domain
+
 
 logging:
   level:
@@ -25,3 +38,4 @@ logging:
       three:
         memory:
           mapper: debug
+
