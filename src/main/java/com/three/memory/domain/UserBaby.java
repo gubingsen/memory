@@ -1,7 +1,12 @@
 package com.three.memory.domain;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
+/**
+ * 用户宝宝
+ */
 public class UserBaby {
     private Integer id;
 
@@ -11,6 +16,7 @@ public class UserBaby {
 
     private String name;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date time;
 
     public Integer getId() {

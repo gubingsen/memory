@@ -21,6 +21,11 @@ public class SystemCon {
     public static final String REDISTOKEN="token";
 
 
-
+    //oss配置
+    public static final String endpoint="oss-cn-beijing.aliyuncs.com";
+    public static final String accessKeyId="LTAIzivGlmVMlGJ8";
+    public static final String accessKeySecret="uMEjqVuxmMJ6ix2AGUpA4BOLI6Fse5";
+    public static final String bucketName="mymemory";
+    public static final String filehost="media";
 
 }
