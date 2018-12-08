@@ -15,7 +15,7 @@ public class ResultBean<T> implements Serializable {
     //总页数
     private int pages;
     //总条数
-    private int count;
+    private long count;
     //当前页码
     private int pageNum;
     //每页显示的数量
@@ -31,11 +31,11 @@ public class ResultBean<T> implements Serializable {
         this.pages = pages;
     }
 
-    public int getCount() {
+    public long getCount() {
         return count;
     }
 
-    public void setCount(int count) {
+    public void setCount(long count) {
         this.count = count;
     }
 
