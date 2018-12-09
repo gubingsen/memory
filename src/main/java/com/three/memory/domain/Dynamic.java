@@ -13,6 +13,16 @@ public class Dynamic {
 
     private Date createtime;
 
+    private int num;
+
+    public int getNum() {
+        return num;
+    }
+
+    public void setNum(int num) {
+        this.num = num;
+    }
+
     public Integer getId() {
         return id;
     }
