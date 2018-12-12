@@ -66,4 +66,10 @@
       integral = #{integral,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectByUid" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from t_integral
+    where uid = #{uid,jdbcType=INTEGER}
+  </select>
 </mapper>

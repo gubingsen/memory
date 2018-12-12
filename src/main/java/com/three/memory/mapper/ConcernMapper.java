@@ -14,4 +14,8 @@ public interface ConcernMapper {
     int updateByPrimaryKeySelective(Concern record);
 
     int updateByPrimaryKey(Concern record);
+
+    long getFollow(Integer uid);
+
+    long getFollowed(Integer uid);
 }

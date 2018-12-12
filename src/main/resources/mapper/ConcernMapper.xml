@@ -66,4 +66,15 @@
       byuid = #{byuid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="getFollow" resultType="java.lang.Long">
+
+    SELECT count(c.uid) from t_concern as c where c.byuid = #{_parameter}
+
+  </select>
+
+  <select id="getFollowed" resultType="java.lang.Long">
+
+    SELECT COUNT(c.byuid) from t_concern as c where c.uid = #{_parameter}
+
+  </select>
 </mapper>

@@ -66,4 +66,10 @@
       num = #{num,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectByPid" resultType="java.lang.Integer">
+    select num from t_inventory where proclaid = #{_parameter}
+  </select>
+  <update id="updateByPid">
+    update t_inventory set num = #{num} where proclaid = #{proclaid}
+  </update>
 </mapper>
