@@ -103,4 +103,9 @@
     select id,imgurl,info,number
     from t_acepack
   </select>
+  <update id="updateNumber" parameterType="Integer">
+    update t_acepack
+    set number = number + 1
+    where id = #{aceid}
+  </update>
 </mapper>

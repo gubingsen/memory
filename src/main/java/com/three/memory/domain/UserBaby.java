@@ -9,15 +9,28 @@ import java.util.Date;
  */
 public class UserBaby {
     private Integer id;
-
     private Integer uid;
-
     private String babymedia;
-
     private String name;
-
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date time;
+    private Integer intage;
+    private String styage;
+
+    public Integer getIntage() {
+        return intage;
+    }
+
+    public void setIntage(Integer intage) {
+        this.intage = intage;
+    }
+
+    public String getStyage() {
+        return styage;
+    }
+
+    public void setStyage(String styage) {
+        this.styage = styage;
+    }
 
     public Integer getId() {
         return id;

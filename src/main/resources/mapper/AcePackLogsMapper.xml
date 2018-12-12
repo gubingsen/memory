@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.three.memory.mapper.AcePackLogsMapper">
+  <resultMap id="BaseResultMap" type="com.three.memory.domain.AcePackLogs">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="usrid" jdbcType="INTEGER" property="usrid" />
+    <result column="aceid" jdbcType="INTEGER" property="aceid" />
+    <result column="logstime" jdbcType="VARCHAR" property="logstime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, usrid, aceid, logstime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_acepacklogs
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_acepacklogs
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.three.memory.domain.AcePackLogs">
+    insert into t_acepacklogs (id, usrid, aceid, 
+      logstime)
+    values (#{id,jdbcType=INTEGER}, #{usrid,jdbcType=INTEGER}, #{aceid,jdbcType=INTEGER}, 
+      #{logstime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.three.memory.domain.AcePackLogs">
+    insert into t_acepacklogs
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="usrid != null">
+        usrid,
+      </if>
+      <if test="aceid != null">
+        aceid,
+      </if>
+      <if test="logstime != null">
+        logstime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="usrid != null">
+        #{usrid,jdbcType=INTEGER},
+      </if>
+      <if test="aceid != null">
+        #{aceid,jdbcType=INTEGER},
+      </if>
+      <if test="logstime != null">
+        #{logstime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.three.memory.domain.AcePackLogs">
+    update t_acepacklogs
+    <set>
+      <if test="usrid != null">
+        usrid = #{usrid,jdbcType=INTEGER},
+      </if>
+      <if test="aceid != null">
+        aceid = #{aceid,jdbcType=INTEGER},
+      </if>
+      <if test="logstime != null">
+        logstime = #{logstime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.three.memory.domain.AcePackLogs">
+    update t_acepacklogs
+    set usrid = #{usrid,jdbcType=INTEGER},
+      aceid = #{aceid,jdbcType=INTEGER},
+      logstime = #{logstime,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectCount" parameterType="Integer" resultType="Integer">
+    select count(*) as count from t_acepacklogs where usrid=#{usrid} and aceid=#{aceid}
+  </select>
+</mapper>

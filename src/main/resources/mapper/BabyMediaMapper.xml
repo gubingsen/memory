@@ -12,8 +12,6 @@
   <sql id="Base_Column_List" >
     id, babyid, media, content, createtime
   </sql>
-
-  <!--一次固定返回十条数据-->
   <select id="select" resultType="com.three.memory.domain.BabyMedia">
     SELECT u.username, bm.id, bm.content, bm.createtime, bm.media
     FROM t_user u JOIN t_userbaby ub
@@ -21,13 +19,10 @@
     LEFT JOIN t_babymedia bm
     ON ub.id = #{babyid,jdbcType=INTEGER} LIMIT #{page,jdbcType=INTEGER},10
   </select>
-
-
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from t_babymedia
     where id = #{id,jdbcType=INTEGER}
   </delete>
-
   <insert id="insert" parameterType="com.three.memory.domain.BabyMedia" >
     <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
       SELECT LAST_INSERT_ID()
@@ -97,4 +92,10 @@
       createtime = #{createtime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectByBybyid" resultMap="BaseResultMap">
+    select
+    *
+    from t_babymedia
+    where babyid=#{bybyid} order by id desc
+  </select>
 </mapper>
