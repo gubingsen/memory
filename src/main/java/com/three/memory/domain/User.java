@@ -15,6 +15,26 @@ public class User {
 
     private String nickname;
 
+    private long follow;
+
+    private long follwoed;
+
+    public long getFollow() {
+        return follow;
+    }
+
+    public void setFollow(long follow) {
+        this.follow = follow;
+    }
+
+    public long getFollwoed() {
+        return follwoed;
+    }
+
+    public void setFollwoed(long follwoed) {
+        this.follwoed = follwoed;
+    }
+
     private Integer flag;
 
     public Integer getId() {

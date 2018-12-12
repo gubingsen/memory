@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.three.memory.mapper.OrderMapper">
+    <resultMap id="MyResutlMap" type="com.three.memory.domain.OderDetail">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="onum" column="onum" jdbcType="VARCHAR"/>
+        <result property="createtime" column="createtime" jdbcType="VARCHAR"/>
+        <result property="pnum" column="pnum" jdbcType="INTEGER"/>
+        <result property="proname" column="proname" jdbcType="VARCHAR"/>
+        <result property="typename" column="typename" jdbcType="VARCHAR"/>
+        <result property="carriage" column="carriage" jdbcType="INTEGER"/>
+        <result property="designer" column="designer" jdbcType="VARCHAR"/>
+        <result property="vprice" column="vprice" jdbcType="INTEGER"/>
+        <result property="type1" column="type1" jdbcType="VARCHAR"/>
+        <result property="type2" column="type2" jdbcType="VARCHAR"/>
+        <result property="type3" column="type3" jdbcType="VARCHAR"/>
+        <result property="price" column="price" jdbcType="INTEGER"/>
+        <collection property="media" ofType="com.three.memory.domain.ProMedia">
+            <id property="id" column="id1" jdbcType="INTEGER"/>
+            <result property="prodetid" column="prodetid" jdbcType="INTEGER"/>
+            <result property="media" column="media" jdbcType="VARCHAR"/>
+        </collection>
+    </resultMap>
+    <insert id="createOrder">
+        insert into t_order (onum,uid,proid,createtime,pnum) values
+        <foreach collection="list" item="item" separator=",">
+            (#{item.onum},#{item.uid},#{item.proid},now(),#{item.pnum})
+        </foreach>
+    </insert>
+    <select id="getOrder" resultMap="MyResutlMap">
+        select o.id,o.onum,o.createtime,o.pnum,p.proname,pt.typename,pd.carriage,pd.designer
+        ,pd.vprice,pd.type1,pd.type2,pd.type3,p.price,pm.*
+        from t_order as o LEFT OUTER JOIN t_product as p on o.proid = p.id
+        LEFT OUTER JOIN t_prodetail as pd on pd.proid = p.id
+        LEFT OUTER JOIN t_protype as pt on pt.id = p.typid
+        LEFT OUTER JOIN t_promedia as pm on pm.prodetid = pd.id
+        <where>
+            <if test="uid != null and uid != ''">
+                o.uid = #{uid}
+            </if>
+            <if test="flag != null and flag != ''">
+                and o.flag = #{flag}
+            </if>
+        </where>
+    </select>
+</mapper>

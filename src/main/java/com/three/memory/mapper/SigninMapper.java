@@ -14,4 +14,6 @@ public interface SigninMapper {
     int updateByPrimaryKeySelective(Signin record);
 
     int updateByPrimaryKey(Signin record);
+
+    Signin selectByUid(Integer uid);
 }
