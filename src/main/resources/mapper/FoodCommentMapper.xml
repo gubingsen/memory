@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.three.memory.mapper.FoodCommentMapper">
+  <resultMap id="BaseResultMap" type="com.three.memory.domain.FoodComment">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="fodid" jdbcType="INTEGER" property="fodid" />
+    <result column="usrid" jdbcType="INTEGER" property="usrid" />
+    <result column="comment" jdbcType="VARCHAR" property="comment" />
+    <result column="comtime" jdbcType="VARCHAR" property="comtime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, fodid, usrid, comment, comtime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_foodcomment
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_foodcomment
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.three.memory.domain.FoodComment">
+    insert into t_foodcomment (fodid, usrid,
+      comment, comtime)
+    values (#{fodid,jdbcType=INTEGER}, #{usrid,jdbcType=INTEGER},
+      #{comment,jdbcType=VARCHAR}, #{comtime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.three.memory.domain.FoodComment">
+    insert into t_foodcomment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="fodid != null">
+        fodid,
+      </if>
+      <if test="usrid != null">
+        usrid,
+      </if>
+      <if test="comment != null">
+        comment,
+      </if>
+      <if test="comtime != null">
+        comtime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="fodid != null">
+        #{fodid,jdbcType=INTEGER},
+      </if>
+      <if test="usrid != null">
+        #{usrid,jdbcType=INTEGER},
+      </if>
+      <if test="comment != null">
+        #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="comtime != null">
+        #{comtime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.three.memory.domain.FoodComment">
+    update t_foodcomment
+    <set>
+      <if test="fodid != null">
+        fodid = #{fodid,jdbcType=INTEGER},
+      </if>
+      <if test="usrid != null">
+        usrid = #{usrid,jdbcType=INTEGER},
+      </if>
+      <if test="comment != null">
+        comment = #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="comtime != null">
+        comtime = #{comtime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.three.memory.domain.FoodComment">
+    update t_foodcomment
+    set fodid = #{fodid,jdbcType=INTEGER},
+      usrid = #{usrid,jdbcType=INTEGER},
+      comment = #{comment,jdbcType=VARCHAR},
+      comtime = #{comtime,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

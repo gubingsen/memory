@@ -20,4 +20,6 @@ public interface AcePackMapper {
     int updateByPrimaryKey(AcePack record);
 
     List<AcePack> selectAll();
+
+    int updateNumber(Integer aceid);
 }

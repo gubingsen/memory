@@ -9,12 +9,27 @@ import java.util.Date;
  */
 public class UserBaby {
     private Integer id;
-
     private Integer uid;
-
     private String babymedia;
-
     private String name;
+    private Integer intage;
+    private String styage;
+
+    public Integer getIntage() {
+        return intage;
+    }
+
+    public void setIntage(Integer intage) {
+        this.intage = intage;
+    }
+
+    public String getStyage() {
+        return styage;
+    }
+
+    public void setStyage(String styage) {
+        this.styage = styage;
+    }
 
     private String time;
 

@@ -30,4 +30,6 @@ public class SystemCon {
 
     public static final Integer PAGENUM = 1;
     public static final Integer PAGESIZE = 5;
+    public static final Integer JUDGEORDER = 0;
+    public static final Integer JUDEGINVENTORY=0;
 }

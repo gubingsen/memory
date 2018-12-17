@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.three.memory.mapper.FoodCollectMapper">
+  <resultMap id="BaseResultMap" type="com.three.memory.domain.FoodCollect">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="fodid" jdbcType="INTEGER" property="fodid" />
+    <result column="usrid" jdbcType="INTEGER" property="usrid" />
+    <result column="coltime" jdbcType="VARCHAR" property="coltime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, fodid, usrid, coltime
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_foodcollect
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_foodcollect
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.three.memory.domain.FoodCollect">
+    insert into t_foodcollect (fodid, usrid,
+      coltime)
+    values (#{fodid,jdbcType=INTEGER}, #{usrid,jdbcType=INTEGER},
+      #{coltime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.three.memory.domain.FoodCollect">
+    insert into t_foodcollect
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="fodid != null">
+        fodid,
+      </if>
+      <if test="usrid != null">
+        usrid,
+      </if>
+      <if test="coltime != null">
+        coltime,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="fodid != null">
+        #{fodid,jdbcType=INTEGER},
+      </if>
+      <if test="usrid != null">
+        #{usrid,jdbcType=INTEGER},
+      </if>
+      <if test="coltime != null">
+        #{coltime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.three.memory.domain.FoodCollect">
+    update t_foodcollect
+    <set>
+      <if test="fodid != null">
+        fodid = #{fodid,jdbcType=INTEGER},
+      </if>
+      <if test="usrid != null">
+        usrid = #{usrid,jdbcType=INTEGER},
+      </if>
+      <if test="coltime != null">
+        coltime = #{coltime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.three.memory.domain.FoodCollect">
+    update t_foodcollect
+    set fodid = #{fodid,jdbcType=INTEGER},
+      usrid = #{usrid,jdbcType=INTEGER},
+      coltime = #{coltime,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

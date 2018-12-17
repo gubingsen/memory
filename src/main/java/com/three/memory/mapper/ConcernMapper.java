@@ -17,5 +17,9 @@ public interface ConcernMapper {
 
     int updateByPrimaryKey(Concern record);
 
+    long getFollow(Integer uid);
+
+    long getFollowed(Integer uid);
+
     int insertAll(List<Concern> concerns);
 }

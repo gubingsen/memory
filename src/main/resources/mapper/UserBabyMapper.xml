@@ -82,5 +82,11 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectByUid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    id,uid,babymedia,name,time,TIMESTAMPDIFF(MONTH, t.time, now()) as intage
+    FROM t_userbaby t
+    where uid=#{uid}
+  </select>
 
 </mapper>

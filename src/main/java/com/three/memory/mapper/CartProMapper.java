@@ -1,6 +1,7 @@
 package com.three.memory.mapper;
 
 import com.three.memory.domain.CartPro;
+import org.apache.ibatis.annotations.Param;
 
 public interface CartProMapper {
     int deleteByPrimaryKey(Integer id);
@@ -14,4 +15,6 @@ public interface CartProMapper {
     int updateByPrimaryKeySelective(CartPro record);
 
     int updateByPrimaryKey(CartPro record);
+
+    int deleById(@Param("cartid") Integer cartid, @Param("prodetid") Integer prodetid);
 }

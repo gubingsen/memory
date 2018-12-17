@@ -14,4 +14,6 @@ public interface IntegralMapper {
     int updateByPrimaryKeySelective(Integral record);
 
     int updateByPrimaryKey(Integral record);
+
+    Integral selectByUid(Integer uid);
 }

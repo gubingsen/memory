@@ -21,6 +21,12 @@ public interface FoodMapper {
 
     List<Food> selectByFtyId(int ftyid);
 
-    List<Food> selectByUsrId(int usrid);
+    List<Food> selectCollect(int usrid);
+
+    List<Food> selectGestation();
+
+    List<Food> selectBySuitable(String suitable);
+
+
 
 }

@@ -1,5 +1,6 @@
 package com.three.memory.mapper;
 
+import com.three.memory.domain.MineCenter;
 import com.three.memory.domain.ProDuct;
 import com.three.memory.domain.ProductInfo;
 
@@ -22,4 +23,6 @@ public interface ProDuctMapper {
     List<Map<String,Object>> selectProduct(Integer tid);
 
     List<ProductInfo> selectdetail(Integer pid);
+
+    List<MineCenter> selectAll();
 }

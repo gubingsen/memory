@@ -101,4 +101,9 @@
       type2 = #{type2,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <delete id="deleById">
+
+    delete from t_cartpro where cartid = #{cartid} and prodetid = #{prodetid}
+
+  </delete>
 </mapper>

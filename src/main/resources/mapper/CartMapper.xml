@@ -66,4 +66,23 @@
       createtime = #{createtime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="getAll" resultType="com.three.memory.domain.ShopCar">
+    SELECT c.createtime as ctime, cp.num as num, p.id as id, p.proname as pname, p.price as price,
+    pd.vprice as vprice, pd.carriage as carriage, pd.designer as designer,
+    pd.type1 as type1, pd.type2 as type2, pd.type3 as type3, pm.media as media
+    from t_cart as c LEFT OUTER JOIN t_cartpro as cp on c.id = cp.cartid
+    LEFT OUTER JOIN t_product as p on cp.prodetid = p.id
+    LEFT OUTER JOIN t_prodetail as pd on pd.proid = p.id
+    LEFT OUTER JOIN t_promedia as pm on pd.id = pm.prodetid
+    where c.uid = #{_parameter}
+  </select>
+  <select id="getNumById" resultType="java.lang.Integer">
+    select cp.num from t_cart as c left outer join t_cartpro as cp
+    on cp.cartid = c.id where c.uid = #{uid} and cp.prodetid = #{proid}
+  </select>
+
+  <select id="getCarId" resultType="java.lang.Integer">
+    select id from t_cart where uid = #{_parameter}
+  </select>
+
 </mapper>
