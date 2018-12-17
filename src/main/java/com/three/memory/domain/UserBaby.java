@@ -12,9 +12,9 @@ public class UserBaby {
     private Integer uid;
     private String babymedia;
     private String name;
-    private Date time;
+    private String time;
     private Integer intage;
-    private String styage;
+    private String strage;
 
     public Integer getIntage() {
         return intage;
@@ -24,12 +24,12 @@ public class UserBaby {
         this.intage = intage;
     }
 
-    public String getStyage() {
-        return styage;
+    public String getStrage() {
+        return strage;
     }
 
-    public void setStyage(String styage) {
-        this.styage = styage;
+    public void setStrage(String strage) {
+        this.strage = strage;
     }
 
     public Integer getId() {
@@ -64,11 +64,11 @@ public class UserBaby {
         this.name = name == null ? null : name.trim();
     }
 
-    public Date getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(String time) {
         this.time = time;
     }
 }

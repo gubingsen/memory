@@ -27,6 +27,6 @@ public interface FoodMapper {
 
     List<Food> selectBySuitable(String suitable);
 
-
+    List<Food> selectByUsrId(int usrid);
 
 }

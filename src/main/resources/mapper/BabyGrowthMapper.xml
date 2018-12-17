@@ -1,117 +1,125 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.three.memory.mapper.BabyGrowthMapper" >
-  <resultMap id="BaseResultMap" type="com.three.memory.domain.BabyGrowth" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="babyid" property="babyid" jdbcType="INTEGER" />
-    <result column="heights" property="heights" jdbcType="INTEGER" />
-    <result column="heads" property="heads" jdbcType="INTEGER" />
-    <result column="weights" property="weights" jdbcType="INTEGER" />
-    <result column="content" property="content" jdbcType="VARCHAR" />
-    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
-  </resultMap>
-  <sql id="Base_Column_List" >
+<mapper namespace="com.three.memory.mapper.BabyGrowthMapper">
+    <resultMap id="BaseResultMap" type="com.three.memory.domain.BabyGrowth">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="babyid" property="babyid" jdbcType="INTEGER"/>
+        <result column="heights" property="heights" jdbcType="INTEGER"/>
+        <result column="heads" property="heads" jdbcType="INTEGER"/>
+        <result column="weights" property="weights" jdbcType="INTEGER"/>
+        <result column="content" property="content" jdbcType="VARCHAR"/>
+        <result column="createtime" property="createtime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
     id, babyid, heights, heads, weights, content, createtime
   </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from t_babygrowth
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from t_babygrowth
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from t_babygrowth
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.three.memory.domain.BabyGrowth" >
-    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into t_babygrowth (babyid, heights, heads, 
-      weights, content, createtime
-      )
-    values (#{babyid,jdbcType=INTEGER}, #{heights,jdbcType=INTEGER}, #{heads,jdbcType=INTEGER}, 
-      #{weights,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.three.memory.domain.BabyGrowth" >
-    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
-      SELECT LAST_INSERT_ID()
-    </selectKey>
-    insert into t_babygrowth
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="babyid != null" >
-        babyid,
-      </if>
-      <if test="heights != null" >
-        heights,
-      </if>
-      <if test="heads != null" >
-        heads,
-      </if>
-      <if test="weights != null" >
-        weights,
-      </if>
-      <if test="content != null" >
-        content,
-      </if>
-      <if test="createtime != null" >
-        createtime,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="babyid != null" >
-        #{babyid,jdbcType=INTEGER},
-      </if>
-      <if test="heights != null" >
-        #{heights,jdbcType=INTEGER},
-      </if>
-      <if test="heads != null" >
-        #{heads,jdbcType=INTEGER},
-      </if>
-      <if test="weights != null" >
-        #{weights,jdbcType=INTEGER},
-      </if>
-      <if test="content != null" >
-        #{content,jdbcType=VARCHAR},
-      </if>
-      <if test="createtime != null" >
-        #{createtime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.three.memory.domain.BabyGrowth" >
-    update t_babygrowth
-    <set >
-      <if test="babyid != null" >
-        babyid = #{babyid,jdbcType=INTEGER},
-      </if>
-      <if test="heights != null" >
-        heights = #{heights,jdbcType=INTEGER},
-      </if>
-      <if test="heads != null" >
-        heads = #{heads,jdbcType=INTEGER},
-      </if>
-      <if test="weights != null" >
-        weights = #{weights,jdbcType=INTEGER},
-      </if>
-      <if test="content != null" >
-        content = #{content,jdbcType=VARCHAR},
-      </if>
-      <if test="createtime != null" >
-        createtime = #{createtime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.three.memory.domain.BabyGrowth" >
-    update t_babygrowth
-    set babyid = #{babyid,jdbcType=INTEGER},
+    <insert id="insert" parameterType="com.three.memory.domain.BabyGrowth">
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into t_babygrowth (babyid, heights, heads,
+        weights, content, createtime
+        )
+        values (#{babyid,jdbcType=INTEGER}, #{heights,jdbcType=INTEGER}, #{heads,jdbcType=INTEGER},
+        #{weights,jdbcType=INTEGER}, #{content,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="com.three.memory.domain.BabyGrowth">
+        <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER">
+            SELECT LAST_INSERT_ID()
+        </selectKey>
+        insert into t_babygrowth
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="babyid != null">
+                babyid,
+            </if>
+            <if test="heights != null">
+                heights,
+            </if>
+            <if test="heads != null">
+                heads,
+            </if>
+            <if test="weights != null">
+                weights,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+            <if test="createtime != null">
+                createtime,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="babyid != null">
+                #{babyid,jdbcType=INTEGER},
+            </if>
+            <if test="heights != null">
+                #{heights,jdbcType=INTEGER},
+            </if>
+            <if test="heads != null">
+                #{heads,jdbcType=INTEGER},
+            </if>
+            <if test="weights != null">
+                #{weights,jdbcType=INTEGER},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="createtime != null">
+                #{createtime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.three.memory.domain.BabyGrowth">
+        update t_babygrowth
+        <set>
+            <if test="babyid != null">
+                babyid = #{babyid,jdbcType=INTEGER},
+            </if>
+            <if test="heights != null">
+                heights = #{heights,jdbcType=INTEGER},
+            </if>
+            <if test="heads != null">
+                heads = #{heads,jdbcType=INTEGER},
+            </if>
+            <if test="weights != null">
+                weights = #{weights,jdbcType=INTEGER},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="createtime != null">
+                createtime = #{createtime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.three.memory.domain.BabyGrowth">
+      update t_babygrowth
+      set babyid = #{babyid,jdbcType=INTEGER},
       heights = #{heights,jdbcType=INTEGER},
       heads = #{heads,jdbcType=INTEGER},
       weights = #{weights,jdbcType=INTEGER},
       content = #{content,jdbcType=VARCHAR},
       createtime = #{createtime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+      where id = #{id,jdbcType=INTEGER}
+    </update>
+    <select id="selectGrowthByBybyid" parameterType="Integer" resultMap="BaseResultMap">
+      select
+      b.id,babyid,heights,heads,weights,content,createtime,TIMESTAMPDIFF(MONTH, u.time, now()) as intage
+      FROM t_babygrowth b
+      LEFT JOIN t_userbaby u
+      ON b.babyid=u.id AND b.babyid=#{bybyid}
+      ORDER BY b.id DESC
+     </select>
 </mapper>

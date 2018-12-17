@@ -1,5 +1,7 @@
 package com.three.memory.controller;
 
+import com.three.memory.domain.BabyGrowth;
+import com.three.memory.domain.UserBaby;
 import com.three.memory.service.BybyService;
 import com.three.memory.vo.ResultBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +36,51 @@ public class BybyController {
     @ResponseBody
     public ResultBean selectByBybyid(String token,Integer pageNum,Integer pageSize,Integer bybyid) {
         return bybyService.selectByBybyid(token, pageNum, pageSize, bybyid);
+    }
+
+    /**
+     * 添加宝宝
+     * @param token
+     * @return
+     */
+    @PostMapping("/insertByby.do")
+    @ResponseBody
+    public ResultBean insertByby(String token, UserBaby byby) {
+
+        return bybyService.insertByby(token, byby);
+    }
+
+    /**
+     * 修改宝宝信息
+     * @param token
+     * @return
+     */
+    @PostMapping("/updateByby.do")
+    @ResponseBody
+    public ResultBean updateByby(String token, UserBaby byby) {
+        return bybyService.updateByby(token, byby);
+    }
+
+    /**
+     * 根据宝宝id查询宝宝的成长记录
+     * @param token
+     * @return
+     */
+    @PostMapping("/selectGrowthByBybyid.do")
+    @ResponseBody
+    public ResultBean selectGrowthByBybyid(String token, Integer bybyid) {
+        return bybyService.selectGrowthByBybyid(token, bybyid);
+    }
+
+    /**
+     * 添加宝宝的成长记录
+     * @param token
+     * @return
+     */
+    @PostMapping("/insertGrowth.do")
+    @ResponseBody
+    public ResultBean insertGrowth(String token, BabyGrowth growth) {
+        return bybyService.insertGrowth(token, growth);
     }
 
 }

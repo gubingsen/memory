@@ -67,9 +67,6 @@
   <update id="update" parameterType="com.three.memory.domain.UserBaby" >
     update t_userbaby
     <set >
-      <if test="uid != null" >
-        uid = #{uid,jdbcType=INTEGER},
-      </if>
       <if test="babymedia != null" >
         babymedia = #{babymedia,jdbcType=VARCHAR},
       </if>
@@ -88,5 +85,53 @@
     FROM t_userbaby t
     where uid=#{uid}
   </select>
-
+  <insert id="insertByby" parameterType="com.three.memory.domain.UserBaby" >
+    <selectKey resultType="java.lang.Integer" keyProperty="id" order="AFTER" >
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into t_userbaby
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        uid,
+      </if>
+      <if test="babymedia != null" >
+        babymedia,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="babymedia != null" >
+        #{babymedia,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByby" parameterType="com.three.memory.domain.UserBaby" >
+    update t_userbaby
+    <set >
+      <if test="babymedia != ''" >
+        babymedia = #{babymedia,jdbcType=VARCHAR},
+      </if>
+      <if test="name != ''" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="time != ''" >
+        time = #{time,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
 </mapper>

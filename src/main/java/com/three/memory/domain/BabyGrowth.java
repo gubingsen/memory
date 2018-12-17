@@ -15,7 +15,27 @@ public class BabyGrowth {
 
     private String content;
 
-    private Date createtime;
+    private String createtime;
+
+    private Integer intage;
+
+    private String strage;
+
+    public Integer getIntage() {
+        return intage;
+    }
+
+    public void setIntage(Integer intage) {
+        this.intage = intage;
+    }
+
+    public String getStrage() {
+        return strage;
+    }
+
+    public void setStrage(String strage) {
+        this.strage = strage;
+    }
 
     public Integer getId() {
         return id;
@@ -65,11 +85,11 @@ public class BabyGrowth {
         this.content = content == null ? null : content.trim();
     }
 
-    public Date getCreatetime() {
+    public String getCreatetime() {
         return createtime;
     }
 
-    public void setCreatetime(Date createtime) {
+    public void setCreatetime(String createtime) {
         this.createtime = createtime;
     }
 }

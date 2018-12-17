@@ -155,4 +155,11 @@
         from t_food
         where suitable = #{suitable}
     </select>
+    <select id="selectByUsrId" resultMap="BaseResultMap">
+        select
+        tf.id as id, ftyid, foodname, img, suitable, effect, gestation, lyingin, lactation, bybytime
+        from t_food tf,t_foodcollect tc
+        where tc.fodid=tf.id and tc.usrid=#{usrid}
+    </select>
+
 </mapper>
