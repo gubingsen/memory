@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.three.memory.mapper.UserInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.three.memory.domain.UserInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="headurl" property="headurl" jdbcType="VARCHAR" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+    <result column="media" property="media" jdbcType="VARCHAR" />
+    <result column="timegap" property="timegap" jdbcType="VARCHAR" />
+    <result column="isvip" property="isvip" jdbcType="VARCHAR" />
+    <result column="cname" property="cname" jdbcType="VARCHAR" />
+    <result column="num" property="num" jdbcType="INTEGER" />
+    <result column="cid" property="cid" jdbcType="INTEGER" />
+    <collection property="babies" ofType="com.three.memory.domain.UserBaby">
+      <id column="tid" property="id" jdbcType="INTEGER" />
+      <result column="uid" property="uid" jdbcType="INTEGER" />
+      <result column="babymedia" property="babymedia" jdbcType="VARCHAR" />
+      <result column="name" property="name" jdbcType="VARCHAR" />
+      <result column="time" property="time" jdbcType="TIMESTAMP" />
+    </collection>
+  </resultMap>
+  <select id="select" resultMap="BaseResultMap">
+    select
+    u.id, u.username, u.headurl, u.nickname,
+    td.content,d.media, td.num,tu.id as tid,
+    case
+    when TIMESTAMPDIFF(second, td.createtime, now()) between 0 and 60 then concat(TIMESTAMPDIFF(second, td.createtime, now()) , '秒钟前')
+    when TIMESTAMPDIFF(minute, td.createtime, now()) between 1 and 60 then concat(TIMESTAMPDIFF(minute, td.createtime, now()) , '分钟前')
+    when TIMESTAMPDIFF(hour, td.createtime, now()) between 1 and 24 then concat(TIMESTAMPDIFF(hour, td.createtime, now()),'小时前')
+    else DATE_FORMAT(td.createtime,'%Y-%m-%d')
+    end as 'timegap',
+
+    case
+    when TIMESTAMPDIFF(minute, now(), tv.expiredate) > 0 then 'yes'
+    else 'no'
+    end as 'isvip',
+    tu.`name` as name,
+    TIMESTAMPDIFF(MONTH, tu.time, now()) as `time`
+
+    from t_user u
+    inner join t_dynamic td
+    on u.id = td.uid
+    left join t_dynmedia d
+    on td.id = d.dynid
+
+    left join t_vip tv
+    on u.id = tv.uid
+    left join t_userbaby tu
+    on u.id = tu.uid
+    where u.flag = 1 and u.id in
+    (select byuid from t_concern where uid = #{uid}) and u.id != #{uid}
+  </select>
+
+  <select id="selectByCid" resultMap="BaseResultMap">
+    select
+    u.id, u.username, u.headurl, u.nickname,
+    td.content,d.media, td.num,tu.id as tid,tc.id as cid, tc.name as cname,
+    case
+    when TIMESTAMPDIFF(second, td.createtime, now()) between 0 and 60 then concat(TIMESTAMPDIFF(second, td.createtime, now()) , '秒前钟')
+    when TIMESTAMPDIFF(minute, td.createtime, now()) between 1 and 60 then concat(TIMESTAMPDIFF(minute, td.createtime, now()) , '分钟前')
+    when TIMESTAMPDIFF(hour, td.createtime, now()) between 1 and 24 then concat(TIMESTAMPDIFF(hour, td.createtime, now()),'小时前')
+    else DATE_FORMAT(td.createtime,'%Y-%m-%d')
+    end as 'timegap',
+
+    case
+    when TIMESTAMPDIFF(minute, now(), tv.expiredate) > 0 then 'yes'
+    else 'no'
+    end as 'isvip',
+    tu.`name` as name,
+    TIMESTAMPDIFF(MONTH, tu.time, now()) as `time`
+    from t_user u
+    inner join t_dynamic td
+    on u.id = td.uid
+    left join t_dynmedia d
+    on td.id = d.dynid
+    left join t_community tc
+    on tc.id = td.comid
+
+    left join t_vip tv
+    on u.id = tv.uid
+    left join t_userbaby tu
+    on u.id = tu.uid
+    where u.flag = 1 and tc.id = #{cid} order by td.num desc
+  </select>
+
+</mapper>

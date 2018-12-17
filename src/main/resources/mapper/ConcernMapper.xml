@@ -66,6 +66,13 @@
       byuid = #{byuid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <insert id="insertAll">
+    insert into t_concern (uid, byuid) values
+    <foreach collection="list" separator="," item="c">
+      (#{c.uid},#{c.byuid})
+    </foreach>
+  </insert>
   <select id="getFollow" resultType="java.lang.Long">
 
     SELECT count(c.uid) from t_concern as c where c.byuid = #{_parameter}

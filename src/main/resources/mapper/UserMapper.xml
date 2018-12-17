@@ -10,6 +10,7 @@
     <result column="headurl" property="headurl" jdbcType="VARCHAR" />
     <result column="nickname" property="nickname" jdbcType="VARCHAR" />
     <result column="flag" property="flag" jdbcType="INTEGER" />
+    <result column="integral" property="integral" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, username, password, email, phone, headurl, nickname, flag
@@ -138,5 +139,12 @@
     <include refid="Base_Column_List" />
     from t_user
     where username = #{username} and password = #{password}
+  </select>
+  
+  <select id="selectToConcern" resultMap="BaseResultMap">
+    select u.*,integral from t_user u left join t_integral i
+    on u.id = i.uid
+    where u.flag = 1  and u.id not in
+    (select byuid from t_concern where uid = #{id}) and u.id != #{id}
   </select>
 </mapper>

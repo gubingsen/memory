@@ -122,4 +122,65 @@
     LEFT OUTER JOIN t_prodetail as pd on p.id = pd.proid
     LEFT OUTER JOIN t_promedia as pm on pd.id = pm.prodetid
   </select>
+
+  <select id="selectProduct" resultType="map">
+    select tp.id, tp.proname, tp.price, tm.media, tm.info, tm.fav, tt.vprice
+    from t_product tp
+    inner join t_protype ty
+    on tp.typid = ty.id
+    left join t_promainimg tm
+    on tp.id = tm.pid
+    left join t_prodetail tt
+    on tt.proid = tp.id
+    where tp.flag = 1 and ty.id = #{tid}
+  </select>
+
+  <resultMap id="MyBase" type="com.three.memory.domain.ProductInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="proname" property="proname" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="INTEGER" />
+    <result column="carriage" property="carriage" jdbcType="INTEGER" />
+    <result column="designer" property="designer" jdbcType="VARCHAR" />
+    <result column="type1" property="type1" jdbcType="VARCHAR" />
+    <result column="type2" property="type2" jdbcType="VARCHAR" />
+    <result column="type3" property="type3" jdbcType="VARCHAR" />
+    <result column="vprice" property="vprice" jdbcType="INTEGER" />
+    <result column="fav" property="fav" jdbcType="VARCHAR" />
+    <result column="info" property="info" jdbcType="VARCHAR" />
+    <result column="feedback" property="feedback" jdbcType="VARCHAR" />
+    <collection property="medias" ofType="com.three.memory.domain.ProMedia">
+      <id column="mid" property="id" jdbcType="INTEGER" />
+      <result column="media" property="media" jdbcType="VARCHAR" />
+    </collection>
+    <collection property="evals" ofType="com.three.memory.domain.ProEval">
+      <id column="eid" property="id" jdbcType="INTEGER" />
+      <result column="username" property="username" jdbcType="VARCHAR" />
+      <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+      <result column="headurl" property="headurl" jdbcType="VARCHAR" />
+      <result column="content" property="content" jdbcType="VARCHAR" />
+      <result column="starlve" property="starlve" jdbcType="VARCHAR" />
+    </collection>
+  </resultMap>
+
+  <select id="selectdetail" resultMap="MyBase">
+    select
+    p.id, p.proname, p.price,
+    tp.carriage, tp.designer, tp.type1, tp.type2, tp.type3, tp.vprice,
+    tn.fav, tn.feedback, tn.info,
+    tm.media,tm.id as mid,
+    tv.content,tv.starlve, tv.id as eid,
+    tu.username, tu.nickname, tu.headurl
+    from t_product p
+    left join t_prodetail tp
+    on p.id = tp.proid
+    left join t_promainimg tn
+    on p.id = tn.pid
+    left join t_promedia tm
+    on p.id = tm.prodetid
+    left join t_proeval tv
+    on p.id = tv.proid
+    left join t_user tu
+    on tv.uid = tu.id
+    where p.id = #{pid}
+  </select>
 </mapper>

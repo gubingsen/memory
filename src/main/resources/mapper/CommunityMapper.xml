@@ -3,7 +3,7 @@
 <mapper namespace="com.three.memory.mapper.CommunityMapper" >
   <resultMap id="BaseResultMap" type="com.three.memory.domain.Community" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="name" property="name" jdbcType="INTEGER" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="flag" property="flag" jdbcType="INTEGER" />
     <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
   </resultMap>
@@ -26,7 +26,7 @@
     </selectKey>
     insert into t_community (name, flag, createtime
       )
-    values (#{name,jdbcType=INTEGER}, #{flag,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}
+    values (#{name,jdbcType=VARCHAR}, #{flag,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.three.memory.domain.Community" >
@@ -47,7 +47,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="name != null" >
-        #{name,jdbcType=INTEGER},
+        #{name,jdbcType=VARCHAR},
       </if>
       <if test="flag != null" >
         #{flag,jdbcType=INTEGER},
@@ -61,7 +61,7 @@
     update t_community
     <set >
       <if test="name != null" >
-        name = #{name,jdbcType=INTEGER},
+        name = #{name,jdbcType=VARCHAR},
       </if>
       <if test="flag != null" >
         flag = #{flag,jdbcType=INTEGER},
@@ -74,9 +74,16 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.three.memory.domain.Community" >
     update t_community
-    set name = #{name,jdbcType=INTEGER},
+    set name = #{name,jdbcType=VARCHAR},
       flag = #{flag,jdbcType=INTEGER},
       createtime = #{createtime,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="selectAll" resultMap="BaseResultMap"  >
+    select
+    <include refid="Base_Column_List" />
+    from t_community
+    where flag = 1
+  </select>
 </mapper>
