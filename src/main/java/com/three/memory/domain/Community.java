@@ -5,11 +5,11 @@ import java.util.Date;
 public class Community {
     private Integer id;
 
-    private Integer name;
+    private String name;
 
     private Integer flag;
 
-    private Date createtime;
+    private String createtime;
 
     public Integer getId() {
         return id;
@@ -19,11 +19,11 @@ public class Community {
         this.id = id;
     }
 
-    public Integer getName() {
+    public String getName() {
         return name;
     }
 
-    public void setName(Integer name) {
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -35,11 +35,11 @@ public class Community {
         this.flag = flag;
     }
 
-    public Date getCreatetime() {
+    public String getCreatetime() {
         return createtime;
     }
 
-    public void setCreatetime(Date createtime) {
+    public void setCreatetime(String createtime) {
         this.createtime = createtime;
     }
 }

@@ -16,8 +16,7 @@ public class UserBaby {
 
     private String name;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date time;
+    private String time;
 
     public Integer getId() {
         return id;
@@ -51,11 +50,11 @@ public class UserBaby {
         this.name = name == null ? null : name.trim();
     }
 
-    public Date getTime() {
+    public String getTime() {
         return time;
     }
 
-    public void setTime(Date time) {
+    public void setTime(String time) {
         this.time = time;
     }
 }

@@ -49,6 +49,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResultBean regist(User user) {
+        user.setHeadurl("http://www.zhaoshangbao.com/upimg/2017-7/2017-7-141648377.jpg");
         return ResultUtil.execOp(mapper.insertSelective(user), "注册");
     }
 

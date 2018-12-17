@@ -66,4 +66,11 @@
       byuid = #{byuid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <insert id="insertAll">
+    insert into t_concern (uid, byuid) values
+    <foreach collection="list" separator="," item="c">
+      (#{c.uid},#{c.byuid})
+    </foreach>
+  </insert>
 </mapper>

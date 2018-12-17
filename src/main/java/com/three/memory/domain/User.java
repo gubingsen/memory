@@ -17,6 +17,16 @@ public class User {
 
     private Integer flag;
 
+    private Integer integral;
+
+    public Integer getIntegral() {
+        return integral;
+    }
+
+    public void setIntegral(Integer integral) {
+        this.integral = integral;
+    }
+
     public Integer getId() {
         return id;
     }
